@@ -1,0 +1,26 @@
+{
+  "AcceptedLinkTypes": [
+  ],
+  "AppDescription": {
+    "en": "Organizer for your Spotify library and playlists"
+  },
+  "AppIcon": {
+  },
+  "AppName": {
+    "en": "Organ"
+  },
+  "BundleIdentifier": "organ",
+  "BundleType": "Application",
+  "BundleVersion": "0.1",
+  "Dependencies": {
+    "api": "1.10.2",
+    "views": "1.18.1"
+  },
+  "RequiredInterface": 1,
+  "RequiredPermissions": [
+  ],
+  "SupportedLanguages": [
+    "en"
+  ],
+  "VendorIdentifier": "se.liesen"
+}

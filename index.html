@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <style>
+      @import url('$views/css/list.css');
+    </style>
+
+    <style>
+      html, body {
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+
+      body, #content {
+        margin: 0;
+      }
+
+      table {
+        border-spacing: 0;
+      }
+
+      .sp-list {
+        font-size: 1.1em;
+      }
+
+      .playlists {
+        background-color: #547980;
+      }
+
+      .artists {
+        background-color: #45ADA8;
+      }
+
+      .albums {
+        background-color: #9DE0AD;
+      }
+
+      .faux-albums {
+        background-color: #E5FCC2;
+      }
+
+      .labels {
+        background-color: #9de0cf;
+      }
+
+      #content, .column {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .column {
+        position: absolute;
+        height: 100%;
+        width: 300px;
+        float: left;
+        top: 0px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+
+      tr.sp-list-item {
+        display: table-row;
+        background: #ECEBE8;
+        display: table-row;
+        min-height: 48px !important;
+        line-height: 48px !important;
+      }
+
+      td.sp-list-cell {
+        display: table-cell;
+      }
+
+      .sp-list-cell-image {
+        text-align: left;
+        width: 48px;
+        min-height: 48px !important;
+      }
+
+      .sp-list {
+        background-image: none !important;
+      }
+
+      .sp-list-layout-toplist {
+        background-image: none !important;
+      }
+
+      .sp-list-layout-toplist .sp-list-cell {
+        height: 48px;
+        line-height: 48px;
+      }
+
+      .sp-list-layout-toplist .sp-list-cell-image {
+        height: 48px;
+        width: 48px;
+      }
+
+      .sp-list-layout-toplist .sp-list-cell-track {
+        margin-left: 48px;
+        font-weight: bold;
+      }
+
+      a {
+        text-decoration: none;
+        color: #222;
+      }
+
+      .primary, .secondary {
+        height: 24px;
+        max-height: 24px;
+      }
+
+      .primary {
+        line-height: 30px;
+        vertical-align: bottom;
+      }
+
+      .secondary {
+        line-height: 18px;
+        color: #999;
+        vertical-align: top;
+        font-weight: normal;
+      }
+
+      .nav tr {
+        font-size: 1.1em;
+        height: 47px;
+        max-height: 47px;
+        line-height: 47px;
+        padding: 0 6px;
+        font-weight: bold;
+      }
+
+      td {
+        overflow-x: hidden;
+        border-color: hsla(0, 100%, 100%, 0.05) transparent hsla(0, 0%, 0%, 0.2);
+        border-style: solid;
+        border-bottom-width: 1px;
+        vertical-align: center;
+        padding: 0;
+        margin: 0;
+      }
+
+      .nav td {
+        padding-left: 6px;
+        width: 100%;
+      }
+    </style>
+
+    <script id="table-list-template" type="_/template">
+        <div class="sp-list-wrapper">
+          <div class="sp-list-body">
+            <table class="sp-list-table">
+              <tbody class="sp-list-table-body">
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </script>
+
+    <script id="table-list-artist-template" type="_/template">
+        <div class="sp-list-wrapper">
+          <div class="sp-list-body">
+            <table class="sp-list-table"><!--
+              <thead class="nav">
+                <tr>
+                  <td class="sp-list-cell" style="width: 300px; background-color: #f2f2f2;" colspan="2"><button>Label search</button></td>
+                </tr>
+              </thead>
+-->
+              <tbody class="sp-list-table-body">
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </script>
+
+    <script id="table-list-item-template" type="_/template">
+      <td class="sp-list-cell sp-list-cell-image"/>
+      <td class="sp-list-cell sp-list-cell-track"/>
+    </script>
+
+    <script id="text-template" type="_/template">
+      <div class="primary"><%= primary %></div>
+      <div class="secondary"><%= secondary %></div>
+    </script>
+  </head>
+  <body>
+      <div class="column" style="left: 0px">
+        <table class="nav" style="width: 300px">
+          <tr class="playlists">
+            <td><a href="#playlists">Playlists</a></td>
+          </tr>
+          <tr class="albums">
+            <td><a href="#albums">Albums</a></td>
+          </tr>
+          <tr class="faux-albums">
+            <td><a href="#fauxPlaylists">Playlist albums</a></td>
+          </tr>
+          <tr class="artists">
+            <td><a href="#artists">Artists</a></td>
+          </tr>
+          <tr>
+            <td><a href="#labels">Labels</a></td>
+          </tr>
+          <tr>
+            <td><a href="#genres">Genres</a></td>
+          </tr>
+          <tr>
+            <td><a href="#friends">Friends</a></td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="content" style="height: 100%"></div>
+
+    <!-- script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script -->
+    <!-- script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script -->
+    <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script -->
+    <script src="sp://organ/lib/jquery.min.js"></script>
+    <script src="sp://organ/lib/underscore-min.js"></script>
+    <script src="sp://organ/lib/backbone.js"></script>
+    <script src="sp://organ/lib/async.js"></script>
+    <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
+    -->
+    <script src="sp://organ/app/app.js"></script>
+  </body>
+</html>
